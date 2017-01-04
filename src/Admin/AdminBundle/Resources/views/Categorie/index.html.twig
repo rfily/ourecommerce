@@ -1,0 +1,59 @@
+{% extends "AdminAdminBundle::layout.html.twig" %}
+
+{% block title %}
+    Liste des Categories
+{% endblock %}
+
+{% block theblog_body %}
+    <div class="row">
+        <div class="col-lg-12">
+            <h1 class="page-header">Liste des catégories</h1>
+        </div>
+    </div><!--/.row-->
+
+    <div class="row">
+        <div class="col-lg-12">
+            <div class="panel panel-default">
+                <div class="row">
+                    <div class="col-lg-12">
+                        <div class="panel panel-default">
+                            <div class="panel-body">
+                                {% if app.session.flashBag.has('info') %}
+                                    <div class="alert alert-success">
+                                        {% for msg in app.session.flashBag.get('info') %}
+                                            {{ msg }}
+                                        {% endfor %}
+                                    </div>
+                                {% endif %}
+                                <a href="{{ path('admin_admin_ajoutcategorie') }}">Ajouter</a>
+                                <table data-toggle="table" data-show-refresh="false" data-show-toggle="false" data-show-columns="false" data-search="true" data-select-item-name="toolbar1" data-pagination="true" data-sort-name="name" data-sort-order="desc">
+                                    <thead>
+                                    <tr>
+                                        <th data-field="id" data-sortable="true">ID</th>
+                                        <th data-field="title"  data-sortable="true">Nom</th>
+                                        <th data-field="actions" data-sortable="true">Actions</th>
+                                    </tr>
+                                    </thead>
+                                    <tbody>
+                                        {% for categorie in categories %}
+                                            <tr>
+                                                <td>{{ categorie.id }}</td>
+                                                <td>{{ categorie.nom }}</td>
+                                                <td>
+                                                    <a href="{{ path('admin_admin_modifiercategorie', {'id': categorie.id}) }}">Editer</a>
+                                                    <a href="{{ path('admin_admin_supprimercategorie', {'id': categorie.id}) }}" onclick="return confirm('Etes vous sure de vouloir supprimer la catégorie ?')">Supprimer</a>
+                                                </td>
+                                            </tr>
+                                        {% endfor %}
+                                    </tbody>
+                                </table>
+                            </div>
+                        </div>
+                    </div>
+                </div><!--/.row-->
+
+
+            </div>
+        </div><!-- /.col-->
+    </div><!-- /.row -->
+{% endblock %}

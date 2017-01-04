@@ -1,0 +1,110 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>{% block title %}{% endblock %}</title>
+    {% block stylesheets %}
+        {% stylesheets
+            '@AdminAdminBundle/Resources/public/css/*'
+            '@AdminAdminBundle/Resources/public/js/select2/dist/css/select2.css'
+             filter='cssrewrite'
+        %}
+            <link href="{{ asset_url }}" rel="stylesheet" type="text/css" media="all">
+        {% endstylesheets %}
+        <link rel="stylesheet" type="text/css" href="{{ asset('bundles/bmatznerfontawesome/css/font-awesome.min.css') }}" />
+    {% endblock %}
+
+    <!--[if lt IE 9]>
+    <script src="js/html5shiv.js"></script>
+    <script src="js/respond.min.js"></script>
+    <![endif]-->
+</head>
+
+<body>
+<nav class="navbar navbar-inverse navbar-fixed-top" role="navigation">
+    <div class="container-fluid">
+        <div class="navbar-header">
+            <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#sidebar-collapse">
+                <span class="sr-only">Toggle navigation</span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+            </button>
+            <a class="navbar-brand" href="#"><span>MyBlog</span>Admin</a>
+            <ul class="user-menu">
+                <li class="dropdown pull-right">
+                    <a href="#" class="dropdown-toggle" data-toggle="dropdown"><svg class="glyph stroked male-user"><use xlink:href="#stroked-male-user"></use></svg> {{ 'layout.logged_in_as'|trans({'%username%': app.user.username}, 'FOSUserBundle') }} <span class="caret"></span></a>
+                    <ul class="dropdown-menu" role="menu">
+                        <li><a href="{{ path('fos_user_profile_show') }}"><svg class="glyph stroked male-user"><use xlink:href="#stroked-male-user"></use></svg> Profile</a></li>
+                        <li><a href="{{ path('fos_user_profile_edit') }}"><svg class="glyph stroked male-user"><use xlink:href="#stroked-male-user"></use></svg> Settings</a></li>
+                        <li><a href="{{ path('fos_user_security_logout') }}"><svg class="glyph stroked cancel"><use xlink:href="#stroked-cancel"></use></svg> Logout</a></li>
+                    </ul>
+                </li>
+            </ul>
+        </div>
+
+    </div><!-- /.container-fluid -->
+</nav>
+
+<div id="sidebar-collapse" class="col-sm-3 col-lg-2 sidebar">
+    <form role="search">
+        <div class="form-group">
+        </div>
+    </form>
+    <ul class="nav menu">
+        <li><a href="{{ path('admin_admin_page') }}"><svg class="glyph stroked calendar"><use xlink:href="#stroked-calendar"></use></svg> Pages</a></li>
+        <li><a href="{{ path('admin_admin_homepage') }}"><svg class="glyph stroked pencil"><use xlink:href="#stroked-pencil"></use></svg> Articles</a></li>
+        <li><a href="{{ path('admin_admin_categorie') }}"><svg class="glyph stroked app-window"><use xlink:href="#stroked-app-window"></use></svg> Categories</a></li>
+        <li><a href="icons.html"><svg class="glyph stroked star"><use xlink:href="#stroked-star"></use></svg> Utilisateurs</a></li>
+    </ul>
+
+</div><!--/.sidebar-->
+
+<div class="col-sm-9 col-sm-offset-3 col-lg-10 col-lg-offset-2 main">
+    <div class="row">
+        <ol class="breadcrumb">
+            <li><a href="#"><svg class="glyph stroked home"><use xlink:href="#stroked-home"></use></svg></a></li>
+            <li class="active">Icons</li>
+        </ol>
+    </div><!--/.row-->
+    {% block theblog_body %}
+    {% endblock %}
+
+</div><!--/.main-->
+{% block javascripts %}
+    {% javascripts
+        '@AdminAdminBundle/Resources/public/js/jquery-1.11.1.min.js'
+        '@AdminAdminBundle/Resources/public/js/bootstrap.min.js'
+        '@AdminAdminBundle/Resources/public/js/bootstrap-table.js'
+        '@AdminAdminBundle/Resources/public/js/chart.min.js'
+        '@AdminAdminBundle/Resources/public/js/chart-data.js'
+        '@AdminAdminBundle/Resources/public/js/easypiechart.js'
+        '@AdminAdminBundle/Resources/public/js/easypiechart-data.js'
+        '@AdminAdminBundle/Resources/public/js/bootstrap-datepicker.js'
+        '@AdminAdminBundle/Resources/public/js/lumino.glyphs.js'
+        '@AdminAdminBundle/Resources/public/js/respond.min.js'
+        '@AdminAdminBundle/Resources/public/js/html5shiv.min.js'
+        '@AdminAdminBundle/Resources/public/js/select2/dist/js/select2.js'
+        '@AdminAdminBundle/Resources/public/js/Page/page.js'
+    %}
+        <script src="{{ asset_url }}"></script>
+    {% endjavascripts %}
+
+    <script>
+        $(window).on('resize', function () {
+            if ($(window).width() > 768) $('#sidebar-collapse').collapse('show')
+        })
+        $(window).on('resize', function () {
+            if ($(window).width() <= 767) $('#sidebar-collapse').collapse('hide')
+        })
+
+        $(document).ready(function(){
+            $('.myselect').select2();
+        });
+    </script>
+{% endblock %}
+{{ tinymce_init({'theme': {'simple': {'menubar': false}}}) }}
+</body>
+
+</html>
