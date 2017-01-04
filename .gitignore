@@ -11,3 +11,7 @@
 /bin/
 /composer.phar
 /.idea/
+/app/SymfonyRequirements.php
+/app/check.php
+composer.lock
+/web/config.php
