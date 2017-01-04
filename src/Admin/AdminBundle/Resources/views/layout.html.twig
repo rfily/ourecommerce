@@ -34,11 +34,11 @@
             <a class="navbar-brand" href="#"><span>MyBlog</span>Admin</a>
             <ul class="user-menu">
                 <li class="dropdown pull-right">
-                    <a href="#" class="dropdown-toggle" data-toggle="dropdown"><svg class="glyph stroked male-user"><use xlink:href="#stroked-male-user"></use></svg> {{ 'layout.logged_in_as'|trans({'%username%': app.user.username}, 'FOSUserBundle') }} <span class="caret"></span></a>
+                    {#<a href="#" class="dropdown-toggle" data-toggle="dropdown"><svg class="glyph stroked male-user"><use xlink:href="#stroked-male-user"></use></svg> {{ 'layout.logged_in_as'|trans({'%username%': app.user.username}, 'FOSUserBundle') }} <span class="caret"></span></a>#}
                     <ul class="dropdown-menu" role="menu">
-                        <li><a href="{{ path('fos_user_profile_show') }}"><svg class="glyph stroked male-user"><use xlink:href="#stroked-male-user"></use></svg> Profile</a></li>
-                        <li><a href="{{ path('fos_user_profile_edit') }}"><svg class="glyph stroked male-user"><use xlink:href="#stroked-male-user"></use></svg> Settings</a></li>
-                        <li><a href="{{ path('fos_user_security_logout') }}"><svg class="glyph stroked cancel"><use xlink:href="#stroked-cancel"></use></svg> Logout</a></li>
+                        {#<li><a href="{{ path('fos_user_profile_show') }}"><svg class="glyph stroked male-user"><use xlink:href="#stroked-male-user"></use></svg> Profile</a></li>#}
+                        {#<li><a href="{{ path('fos_user_profile_edit') }}"><svg class="glyph stroked male-user"><use xlink:href="#stroked-male-user"></use></svg> Settings</a></li>#}
+                        {#<li><a href="{{ path('fos_user_security_logout') }}"><svg class="glyph stroked cancel"><use xlink:href="#stroked-cancel"></use></svg> Logout</a></li>#}
                     </ul>
                 </li>
             </ul>
@@ -53,7 +53,7 @@
         </div>
     </form>
     <ul class="nav menu">
-        <li><a href="{{ path('admin_admin_page') }}"><svg class="glyph stroked calendar"><use xlink:href="#stroked-calendar"></use></svg> Pages</a></li>
+        {#<li><a href="{{ path('admin_admin_page') }}"><svg class="glyph stroked calendar"><use xlink:href="#stroked-calendar"></use></svg> Pages</a></li>#}
         <li><a href="{{ path('admin_admin_homepage') }}"><svg class="glyph stroked pencil"><use xlink:href="#stroked-pencil"></use></svg> Articles</a></li>
         <li><a href="{{ path('admin_admin_categorie') }}"><svg class="glyph stroked app-window"><use xlink:href="#stroked-app-window"></use></svg> Categories</a></li>
         <li><a href="icons.html"><svg class="glyph stroked star"><use xlink:href="#stroked-star"></use></svg> Utilisateurs</a></li>

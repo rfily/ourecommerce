@@ -21,8 +21,7 @@
                             <div class="panel-body">
                                 <form method="post" action="{{ path('admin_admin_ajoutcategorie') }}">
                                     <div class="form-group">
-                                        <label>{{ form_label(formajout.nom,'Nom') }}</label>
-                                        {{ form_widget(formajout.nom, {'attr':{'class':'form-control'}}) }}
+                                        {{ form_widget(formajout) }}
                                     </div>
                                     {{ form_rest(formajout) }}
                                     <button type="submit" class="btn btn-primary">Enregistrer</button>
