@@ -9,3 +9,15 @@ admin_admin_categorie:
 admin_admin_ajoutcategorie:
     path:     /categorie/ajout
     defaults: { _controller: AdminAdminBundle:Categorie:ajouter }
+
+admin_admin_modifiercategorie:
+    path:     /categorie/modifier/{id}
+    defaults: { _controller: AdminAdminBundle:Categorie:modifier }
+    requirements:
+        id: \d+
+
+admin_admin_supprimercategorie:
+    path:     /categorie/supprimer/{id}
+    defaults: { _controller: AdminAdminBundle:Categorie:supprimer }
+    requirements:
+        id: \d+
