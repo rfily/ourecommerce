@@ -6,7 +6,6 @@ use Admin\AdminBundle\Entity\Categorie;
 use Admin\AdminBundle\Form\CategorieType;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Symfony\Component\HttpFoundation\Request;
-use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\HttpKernel\Exception\NotFoundHttpException;
 
 class CategorieController extends Controller
@@ -79,5 +78,18 @@ class CategorieController extends Controller
         $em->flush();
         $request->getSession()->getFlashBag()->add('notice', 'Catégorie bien supprimée');
         return $this->redirectToRoute('admin_admin_categorie');
+    }
+
+    public function detailCategorieAction($id, Request $request)
+    {
+        $repository = $this->getDoctrine()->getEntityManager()->getRepository('AdminAdminBundle:Categorie');
+        $categorieParent = $repository->find($id);
+
+        $categories = $categorieParent->getEnfants();
+
+        return $this->render('@AdminAdmin/Categorie/detail_categorie.html.twig', array(
+            'categorieParent' => $categorieParent,
+            'categories'      => $categories
+        ));
     }
 }

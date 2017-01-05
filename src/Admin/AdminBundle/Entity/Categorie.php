@@ -2,6 +2,7 @@
 
 namespace Admin\AdminBundle\Entity;
 
+use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\ORM\Mapping as ORM;
 
 /**
@@ -38,10 +39,23 @@ class Categorie
     /**
      * @var
      *
-     * @ORM\OneToMany(targetEntity="Admin\AdminBundle\Entity\SousCategorie", mappedBy="categorie")
+     * @ORM\OneToMany(targetEntity="Admin\AdminBundle\Entity\Categorie", mappedBy="parent", cascade={"remove"})
+     * @ORM\JoinColumn(nullable=true)
      */
-    private $sousCategories;
+    private $enfants;
 
+    /**
+     * @var
+     *
+     * @ORM\ManyToOne(targetEntity="Admin\AdminBundle\Entity\Categorie", inversedBy="enfants", fetch="EAGER")
+     * @ORM\JoinColumn(name="parent", referencedColumnName="id", nullable=true)
+     */
+    private $parent;
+
+    public function __construct()
+    {
+        $this->enfants = new ArrayCollection();
+    }
 
     /**
      * Get id
@@ -100,46 +114,65 @@ class Categorie
     {
         return $this->description;
     }
-    /**
-     * Constructor
-     */
-    public function __construct()
-    {
-        $this->sousCategories = new \Doctrine\Common\Collections\ArrayCollection();
-    }
+
 
     /**
-     * Add sousCategory
+     * Add enfant
      *
-     * @param \Admin\AdminBundle\Entity\SousCategorie $sousCategory
+     * @param \Admin\AdminBundle\Entity\Categorie $enfant
      *
      * @return Categorie
      */
-    public function addSousCategory(\Admin\AdminBundle\Entity\SousCategorie $sousCategory)
+    public function addEnfant(\Admin\AdminBundle\Entity\Categorie $enfant)
     {
-        $this->sousCategories[] = $sousCategory;
-        $sousCategory->setCategorie($this);
+        $this->enfants[] = $enfant;
+        $enfant->setParent($this);
 
         return $this;
     }
 
     /**
-     * Remove sousCategory
+     * Remove enfant
      *
-     * @param \Admin\AdminBundle\Entity\SousCategorie $sousCategory
+     * @param \Admin\AdminBundle\Entity\Categorie $enfant
      */
-    public function removeSousCategory(\Admin\AdminBundle\Entity\SousCategorie $sousCategory)
+    public function removeEnfant(\Admin\AdminBundle\Entity\Categorie $enfant)
     {
-        $this->sousCategories->removeElement($sousCategory);
+        $this->enfants->removeElement($enfant);
     }
 
     /**
-     * Get sousCategories
+     * Get enfants
      *
      * @return \Doctrine\Common\Collections\Collection
      */
-    public function getSousCategories()
+    public function getEnfants()
     {
-        return $this->sousCategories;
+        return $this->enfants;
+    }
+
+    /**
+     * Set parent
+     *
+     * @param \Admin\AdminBundle\Entity\Categorie $parent
+     *
+     * @return Categorie
+     */
+    public function setParent(\Admin\AdminBundle\Entity\Categorie $parent = null)
+    {
+//        $this->addEnfant($this);
+        $this->parent = $parent;
+
+        return $this;
+    }
+
+    /**
+     * Get parent
+     *
+     * @return \Admin\AdminBundle\Entity\Categorie
+     */
+    public function getParent()
+    {
+        return $this->parent;
     }
 }

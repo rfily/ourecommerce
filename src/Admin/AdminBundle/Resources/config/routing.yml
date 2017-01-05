@@ -21,3 +21,9 @@ admin_admin_supprimercategorie:
     defaults: { _controller: AdminAdminBundle:Categorie:supprimer }
     requirements:
         id: \d+
+
+admin_admin_detailcategorie:
+    path:     /categorie/detail/{id}
+    defaults: { _controller: AdminAdminBundle:Categorie:detailCategorie }
+    requirements:
+        id: \d+
