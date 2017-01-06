@@ -5,12 +5,12 @@ namespace Admin\AdminBundle\Entity;
 use Doctrine\ORM\Mapping as ORM;
 
 /**
- * SousCategorie
+ * Produit
  *
- * @ORM\Table(name="sous_categorie")
- * @ORM\Entity(repositoryClass="Admin\AdminBundle\Repository\SousCategorieRepository")
+ * @ORM\Table(name="produit")
+ * @ORM\Entity(repositoryClass="Admin\AdminBundle\Repository\ProduitRepository")
  */
-class SousCategorie
+class Produit
 {
     /**
      * @var int
@@ -29,6 +29,13 @@ class SousCategorie
     private $nom;
 
     /**
+     * @var float
+     *
+     * @ORM\Column(name="prix", type="float")
+     */
+    private $prix;
+
+    /**
      * @var string
      *
      * @ORM\Column(name="description", type="text", nullable=true)
@@ -36,12 +43,12 @@ class SousCategorie
     private $description;
 
     /**
-     * @var
+     * @var bool
      *
-     * @ORM\ManyToOne(targetEntity="Admin\AdminBundle\Entity\Categorie", inversedBy="sousCategories")
-     * @ORM\JoinColumn(nullable=false)
+     * @ORM\Column(name="actif", type="boolean")
      */
-    private $categorie;
+    private $actif;
+
 
     /**
      * Get id
@@ -58,7 +65,7 @@ class SousCategorie
      *
      * @param string $nom
      *
-     * @return SousCategorie
+     * @return Produit
      */
     public function setNom($nom)
     {
@@ -78,11 +85,35 @@ class SousCategorie
     }
 
     /**
+     * Set prix
+     *
+     * @param float $prix
+     *
+     * @return Produit
+     */
+    public function setPrix($prix)
+    {
+        $this->prix = $prix;
+
+        return $this;
+    }
+
+    /**
+     * Get prix
+     *
+     * @return float
+     */
+    public function getPrix()
+    {
+        return $this->prix;
+    }
+
+    /**
      * Set description
      *
      * @param string $description
      *
-     * @return SousCategorie
+     * @return Produit
      */
     public function setDescription($description)
     {
@@ -102,26 +133,27 @@ class SousCategorie
     }
 
     /**
-     * Set categorie
+     * Set actif
      *
-     * @param \Admin\AdminBundle\Entity\Categorie $categorie
+     * @param boolean $actif
      *
-     * @return SousCategorie
+     * @return Produit
      */
-    public function setCategorie(\Admin\AdminBundle\Entity\Categorie $categorie)
+    public function setActif($actif)
     {
-        $this->categorie = $categorie;
+        $this->actif = $actif;
 
         return $this;
     }
 
     /**
-     * Get categorie
+     * Get actif
      *
-     * @return \Admin\AdminBundle\Entity\Categorie
+     * @return bool
      */
-    public function getCategorie()
+    public function getActif()
     {
-        return $this->categorie;
+        return $this->actif;
     }
 }
+

@@ -30,7 +30,7 @@ class CategorieController extends Controller
             $em->persist($categorie);
             $em->flush();
 
-            $request->getSession()->getFlashBag()->add('notice', 'Annonce bien enregistrée.');
+            $request->getSession()->getFlashBag()->add('notice', 'Catégorie bien enregistrée.');
 
             return $this->redirectToRoute('admin_admin_categorie');
         }

@@ -54,9 +54,9 @@
     </form>
     <ul class="nav menu">
         {#<li><a href="{{ path('admin_admin_page') }}"><svg class="glyph stroked calendar"><use xlink:href="#stroked-calendar"></use></svg> Pages</a></li>#}
-        <li><a href="{{ path('admin_admin_homepage') }}"><svg class="glyph stroked pencil"><use xlink:href="#stroked-pencil"></use></svg> Articles</a></li>
-        <li><a href="{{ path('admin_admin_categorie') }}"><svg class="glyph stroked app-window"><use xlink:href="#stroked-app-window"></use></svg> Categories</a></li>
-        <li><a href="icons.html"><svg class="glyph stroked star"><use xlink:href="#stroked-star"></use></svg> Utilisateurs</a></li>
+        <li><a href="{{ path('admin_admin_produits') }}"><i class="fa fa-lg fa-shopping-cart" aria-hidden="true"></i>    Produits</a></li>
+        <li><a href="{{ path('admin_admin_categorie') }}"><i class="fa fa-lg fa-folder-o" aria-hidden="true"></i> Categories</a></li>
+        <li><a href="icons.html"><i class="fa fa-lg fa-user-o" aria-hidden="true"></i></use></svg> Utilisateurs</a></li>
     </ul>
 
 </div><!--/.sidebar-->
@@ -87,6 +87,7 @@
         '@AdminAdminBundle/Resources/public/js/html5shiv.min.js'
         '@AdminAdminBundle/Resources/public/js/select2/dist/js/select2.js'
         '@AdminAdminBundle/Resources/public/js/Page/page.js'
+        '@AdminAdminBundle/Resources/public/js/produit.js'
     %}
         <script src="{{ asset_url }}"></script>
     {% endjavascripts %}
