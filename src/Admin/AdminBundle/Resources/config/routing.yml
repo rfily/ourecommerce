@@ -28,6 +28,30 @@ admin_admin_detailcategorie:
     requirements:
         id: \d+
 
+admin_admin_produits:
+    path:     /produits/{idCategorie}
+    defaults:
+        _controller: AdminAdminBundle:Produit:lister
+        idCategorie : null
+    requirements:
+        id: \d+
+
+admin_admin_ajouter_produit:
+    path:     /produit/ajouter
+    defaults: { _controller: AdminAdminBundle:Produit:ajouter }
+
+admin_admin_modifier_produit:
+    path:     /produit/modifier/{id}
+    defaults: { _controller: AdminAdminBundle:Produit:modifier }
+    requirements:
+        id: \d+
+
+admin_admin_supprimer_produit:
+    path:     /produit/supprimer/{id}
+    defaults: { _controller: AdminAdminBundle:Produit:supprimer }
+    requirements:
+        id: \d+
+
 admin_admin_utilisateur:
     path:     /admin/utilisateur_liste
     defaults: { _controller: AdminAdminBundle:Utilisateur:index }

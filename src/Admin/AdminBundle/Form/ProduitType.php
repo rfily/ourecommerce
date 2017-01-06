@@ -2,28 +2,29 @@
 
 namespace Admin\AdminBundle\Form;
 
-use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
 
-class CategorieType extends AbstractType
+class ProduitType extends AbstractType
 {
-    /** @var  EntityManagerInterface */
-    protected $em;
-
     /**
      * {@inheritdoc}
      */
     public function buildForm(FormBuilderInterface $builder, array $options)
     {
-        $builder->add('nom',         'text')
-                ->add('description', 'textarea')
-                ->add('parent', 'entity', array(
-                    'class'    => 'Admin\AdminBundle\Entity\Categorie',
-                    'property' => 'nom',
-                    'required' => false
-                ))
+        $builder
+            ->add('nom')
+            ->add('prix')
+            ->add('description')
+            ->add('actif')
+            ->add('categories', 'entity', array(
+                'class'    => 'Admin\AdminBundle\Entity\Categorie',
+                'property' => 'nom',
+                'multiple' => true,
+                'expanded' => true,
+                'required' => false
+            ))
         ;
     }
     
@@ -33,7 +34,7 @@ class CategorieType extends AbstractType
     public function configureOptions(OptionsResolver $resolver)
     {
         $resolver->setDefaults(array(
-            'data_class' => 'Admin\AdminBundle\Entity\Categorie'
+            'data_class' => 'Admin\AdminBundle\Entity\Produit'
         ));
     }
 
@@ -42,7 +43,7 @@ class CategorieType extends AbstractType
      */
     public function getBlockPrefix()
     {
-        return 'admin_adminbundle_categorie';
+        return 'admin_adminbundle_produit';
     }
 
 

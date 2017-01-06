@@ -65,13 +65,12 @@
         </div>
     </form>
     <ul class="nav menu">
-
-        <li><a href="widgets.html"><svg class="glyph stroked calendar"><use xlink:href="#stroked-calendar"></use></svg> Produits</a></li>
-        <li><a href="{{ path('admin_admin_categorie') }}"><svg class="glyph stroked app-window"><use xlink:href="#stroked-app-window"></use></svg> Categories</a></li>
+        {#<li><a href="{{ path('admin_admin_page') }}"><svg class="glyph stroked calendar"><use xlink:href="#stroked-calendar"></use></svg> Pages</a></li>#}
+        <li><a href="{{ path('admin_admin_produits') }}"><i class="fa fa-lg fa-shopping-cart" aria-hidden="true"></i>    Produits</a></li>
+        <li><a href="{{ path('admin_admin_categorie') }}"><i class="fa fa-lg fa-folder-o" aria-hidden="true"></i> Categories</a></li>
         {% if 'ROLE_ADMIN' in app.user.roles %}
-            <li><a href="{{ path('admin_admin_utilisateur') }}"><svg class="glyph stroked star"><use xlink:href="#stroked-star"></use></svg> Utilisateurs</a></li>
+            <li><a href="{{ path('admin_admin_utilisateur') }}"><i class="fa fa-lg fa-user-o" aria-hidden="true"></i> Utilisateurs</a></li>
         {% endif %}
-
     </ul>
 
 </div><!--/.sidebar-->
@@ -90,17 +89,21 @@
 {% endif %}
 {% block javascripts %}
     {% javascripts
-    '@AdminAdminBundle/Resources/public/js/jquery-1.11.1.min.js'
-    '@AdminAdminBundle/Resources/public/js/bootstrap.min.js'
-    '@AdminAdminBundle/Resources/public/js/bootstrap-table.js'
-    '@AdminAdminBundle/Resources/public/js/chart.min.js'
-    '@AdminAdminBundle/Resources/public/js/chart-data.js'
-    '@AdminAdminBundle/Resources/public/js/easypiechart.js'
-    '@AdminAdminBundle/Resources/public/js/easypiechart-data.js'
-    '@AdminAdminBundle/Resources/public/js/bootstrap-datepicker.js'
-    '@AdminAdminBundle/Resources/public/js/lumino.glyphs.js'
-    '@AdminAdminBundle/Resources/public/js/respond.min.js'
-    '@AdminAdminBundle/Resources/public/js/html5shiv.min.js'
+        '@AdminAdminBundle/Resources/public/js/jquery-1.11.1.min.js'
+        '@AdminAdminBundle/Resources/public/js/bootstrap.min.js'
+        '@AdminAdminBundle/Resources/public/js/bootstrap-table.js'
+        '@AdminAdminBundle/Resources/public/js/chart.min.js'
+        '@AdminAdminBundle/Resources/public/js/chart-data.js'
+        '@AdminAdminBundle/Resources/public/js/easypiechart.js'
+        '@AdminAdminBundle/Resources/public/js/easypiechart-data.js'
+        '@AdminAdminBundle/Resources/public/js/bootstrap-datepicker.js'
+        '@AdminAdminBundle/Resources/public/js/lumino.glyphs.js'
+        '@AdminAdminBundle/Resources/public/js/respond.min.js'
+        '@AdminAdminBundle/Resources/public/js/html5shiv.min.js'
+        '@AdminAdminBundle/Resources/public/js/select2/dist/js/select2.js'
+        '@AdminAdminBundle/Resources/public/js/Page/page.js'
+        '@AdminAdminBundle/Resources/public/js/produit.js'
+        '@AdminAdminBundle/Resources/public/js/bootstrap-select.js'
     %}
     <script src="{{ asset_url }}"></script>
     {% endjavascripts %}
