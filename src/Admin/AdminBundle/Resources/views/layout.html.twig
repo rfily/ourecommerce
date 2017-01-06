@@ -6,11 +6,10 @@
     <title>{% block title %}{% endblock %}</title>
     {% block stylesheets %}
         {% stylesheets
-            '@AdminAdminBundle/Resources/public/css/*'
-            '@AdminAdminBundle/Resources/public/js/select2/dist/css/select2.css'
-             filter='cssrewrite'
+        '@AdminAdminBundle/Resources/public/css/*'
+        filter='cssrewrite'
         %}
-            <link href="{{ asset_url }}" rel="stylesheet" type="text/css" media="all">
+        <link href="{{ asset_url }}" rel="stylesheet" type="text/css" media="all">
         {% endstylesheets %}
         <link rel="stylesheet" type="text/css" href="{{ asset('bundles/bmatznerfontawesome/css/font-awesome.min.css') }}" />
     {% endblock %}
@@ -19,9 +18,21 @@
     <script src="js/html5shiv.js"></script>
     <script src="js/respond.min.js"></script>
     <![endif]-->
+
 </head>
 
 <body>
+{% if app.request.attributes.get('_route') starts with 'fos_user' and app.request.attributes.get('_route') != 'xxfos_user_profile_show' and app.request.attributes.get('_route') != 'xxfos_user_profile_edit' %}
+<div class="row">
+    <div class="col-xs-10 col-xs-offset-1 col-sm-8 col-sm-offset-2 col-md-4 col-md-offset-4">
+        <div class="login-panel panel panel-default">
+            {% block content %}
+
+            {% endblock %}
+        </div>
+    </div>
+</div>
+{% else %}
 <nav class="navbar navbar-inverse navbar-fixed-top" role="navigation">
     <div class="container-fluid">
         <div class="navbar-header">
@@ -31,7 +42,7 @@
                 <span class="icon-bar"></span>
                 <span class="icon-bar"></span>
             </button>
-            <a class="navbar-brand" href="#"><span>MyBlog</span>Admin</a>
+            <a class="navbar-brand" href="#"><span>OurEcommerce</span>Admin</a>
             <ul class="user-menu">
                 <li class="dropdown pull-right">
                     {#<a href="#" class="dropdown-toggle" data-toggle="dropdown"><svg class="glyph stroked male-user"><use xlink:href="#stroked-male-user"></use></svg> {{ 'layout.logged_in_as'|trans({'%username%': app.user.username}, 'FOSUserBundle') }} <span class="caret"></span></a>#}
@@ -39,6 +50,7 @@
                         {#<li><a href="{{ path('fos_user_profile_show') }}"><svg class="glyph stroked male-user"><use xlink:href="#stroked-male-user"></use></svg> Profile</a></li>#}
                         {#<li><a href="{{ path('fos_user_profile_edit') }}"><svg class="glyph stroked male-user"><use xlink:href="#stroked-male-user"></use></svg> Settings</a></li>#}
                         {#<li><a href="{{ path('fos_user_security_logout') }}"><svg class="glyph stroked cancel"><use xlink:href="#stroked-cancel"></use></svg> Logout</a></li>#}
+                        <li><a href="{{ path('fos_user_security_logout') }}"><svg class="glyph stroked cancel"><use xlink:href="#stroked-cancel"></use></svg> Logout</a></li>
                     </ul>
                 </li>
             </ul>
@@ -53,10 +65,13 @@
         </div>
     </form>
     <ul class="nav menu">
-        {#<li><a href="{{ path('admin_admin_page') }}"><svg class="glyph stroked calendar"><use xlink:href="#stroked-calendar"></use></svg> Pages</a></li>#}
-        <li><a href="{{ path('admin_admin_homepage') }}"><svg class="glyph stroked pencil"><use xlink:href="#stroked-pencil"></use></svg> Articles</a></li>
+
+        <li><a href="widgets.html"><svg class="glyph stroked calendar"><use xlink:href="#stroked-calendar"></use></svg> Produits</a></li>
         <li><a href="{{ path('admin_admin_categorie') }}"><svg class="glyph stroked app-window"><use xlink:href="#stroked-app-window"></use></svg> Categories</a></li>
-        <li><a href="icons.html"><svg class="glyph stroked star"><use xlink:href="#stroked-star"></use></svg> Utilisateurs</a></li>
+        {% if 'ROLE_ADMIN' in app.user.roles %}
+            <li><a href="{{ path('admin_admin_utilisateur') }}"><svg class="glyph stroked star"><use xlink:href="#stroked-star"></use></svg> Utilisateurs</a></li>
+        {% endif %}
+
     </ul>
 
 </div><!--/.sidebar-->
@@ -72,25 +87,23 @@
     {% endblock %}
 
 </div><!--/.main-->
+{% endif %}
 {% block javascripts %}
     {% javascripts
-        '@AdminAdminBundle/Resources/public/js/jquery-1.11.1.min.js'
-        '@AdminAdminBundle/Resources/public/js/bootstrap.min.js'
-        '@AdminAdminBundle/Resources/public/js/bootstrap-table.js'
-        '@AdminAdminBundle/Resources/public/js/chart.min.js'
-        '@AdminAdminBundle/Resources/public/js/chart-data.js'
-        '@AdminAdminBundle/Resources/public/js/easypiechart.js'
-        '@AdminAdminBundle/Resources/public/js/easypiechart-data.js'
-        '@AdminAdminBundle/Resources/public/js/bootstrap-datepicker.js'
-        '@AdminAdminBundle/Resources/public/js/lumino.glyphs.js'
-        '@AdminAdminBundle/Resources/public/js/respond.min.js'
-        '@AdminAdminBundle/Resources/public/js/html5shiv.min.js'
-        '@AdminAdminBundle/Resources/public/js/select2/dist/js/select2.js'
-        '@AdminAdminBundle/Resources/public/js/Page/page.js'
+    '@AdminAdminBundle/Resources/public/js/jquery-1.11.1.min.js'
+    '@AdminAdminBundle/Resources/public/js/bootstrap.min.js'
+    '@AdminAdminBundle/Resources/public/js/bootstrap-table.js'
+    '@AdminAdminBundle/Resources/public/js/chart.min.js'
+    '@AdminAdminBundle/Resources/public/js/chart-data.js'
+    '@AdminAdminBundle/Resources/public/js/easypiechart.js'
+    '@AdminAdminBundle/Resources/public/js/easypiechart-data.js'
+    '@AdminAdminBundle/Resources/public/js/bootstrap-datepicker.js'
+    '@AdminAdminBundle/Resources/public/js/lumino.glyphs.js'
+    '@AdminAdminBundle/Resources/public/js/respond.min.js'
+    '@AdminAdminBundle/Resources/public/js/html5shiv.min.js'
     %}
-        <script src="{{ asset_url }}"></script>
+    <script src="{{ asset_url }}"></script>
     {% endjavascripts %}
-
     <script>
         $(window).on('resize', function () {
             if ($(window).width() > 768) $('#sidebar-collapse').collapse('show')
@@ -98,13 +111,8 @@
         $(window).on('resize', function () {
             if ($(window).width() <= 767) $('#sidebar-collapse').collapse('hide')
         })
-
-        $(document).ready(function(){
-            $('.myselect').select2();
-        });
     </script>
 {% endblock %}
-{{ tinymce_init({'theme': {'simple': {'menubar': false}}}) }}
 </body>
 
 </html>
