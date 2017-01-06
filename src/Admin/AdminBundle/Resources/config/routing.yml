@@ -1,3 +1,29 @@
 admin_admin_homepage:
     path:     /
     defaults: { _controller: AdminAdminBundle:Default:index }
+
+admin_admin_categorie:
+    path:     /categorie
+    defaults: { _controller: AdminAdminBundle:Categorie:lister }
+
+admin_admin_ajoutcategorie:
+    path:     /categorie/ajout
+    defaults: { _controller: AdminAdminBundle:Categorie:ajouter }
+
+admin_admin_modifiercategorie:
+    path:     /categorie/modifier/{id}
+    defaults: { _controller: AdminAdminBundle:Categorie:modifier }
+    requirements:
+        id: \d+
+
+admin_admin_supprimercategorie:
+    path:     /categorie/supprimer/{id}
+    defaults: { _controller: AdminAdminBundle:Categorie:supprimer }
+    requirements:
+        id: \d+
+
+admin_admin_detailcategorie:
+    path:     /categorie/detail/{id}
+    defaults: { _controller: AdminAdminBundle:Categorie:detailCategorie }
+    requirements:
+        id: \d+
