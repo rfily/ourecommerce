@@ -18,7 +18,7 @@ class AppKernel extends Kernel
             new AppBundle\AppBundle(),
 
             new Admin\AdminBundle\AdminAdminBundle(),
-            //new FOS\UserBundle\FOSUserBundle(),
+            new FOS\UserBundle\FOSUserBundle(),
             new Symfony\Bundle\AsseticBundle\AsseticBundle(),
             new Stfalcon\Bundle\TinymceBundle\StfalconTinymceBundle(),
             new Genemu\Bundle\FormBundle\GenemuFormBundle(),

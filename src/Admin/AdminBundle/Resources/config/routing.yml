@@ -51,3 +51,19 @@ admin_admin_supprimer_produit:
     defaults: { _controller: AdminAdminBundle:Produit:supprimer }
     requirements:
         id: \d+
+
+admin_admin_utilisateur:
+    path:     /admin/utilisateur_liste
+    defaults: { _controller: AdminAdminBundle:Utilisateur:index }
+
+admin_admin_utilisateur_ajout:
+    path:     /admin/utilisateur_ajout
+    defaults: { _controller: AdminAdminBundle:Utilisateur:ajout }
+
+admin_admin_utilisateur_modif:
+    path:     /admin/utilisateur_modif/{id}
+    defaults: { _controller: AdminAdminBundle:Utilisateur:modif }
+
+admin_admin_utilisateur_suppr:
+    path:     /admin/utilisateur_suppr/{id}
+    defaults: { _controller: AdminAdminBundle:Utilisateur:suppr }
