@@ -10,4 +10,18 @@ namespace Admin\AdminBundle\Repository;
  */
 class ProduitRepository extends \Doctrine\ORM\EntityRepository
 {
+    public function findByCategorieId($idCategorie)
+    {
+        $qb = $this->createQueryBuilder('p')
+                ->join('p.categories', 'c')
+                ->addSelect('c')
+                ->setParameter('idC', $idCategorie)
+                ->where('c.id = :idC')
+        ;
+
+        return $qb
+            ->getQuery()
+            ->getResult()
+        ;
+    }
 }

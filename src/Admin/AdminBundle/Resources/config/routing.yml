@@ -29,8 +29,12 @@ admin_admin_detailcategorie:
         id: \d+
 
 admin_admin_produits:
-    path:     /produits
-    defaults: { _controller: AdminAdminBundle:Produit:lister }
+    path:     /produits/{idCategorie}
+    defaults:
+        _controller: AdminAdminBundle:Produit:lister
+        idCategorie : null
+    requirements:
+        id: \d+
 
 admin_admin_ajouter_produit:
     path:     /produit/ajouter

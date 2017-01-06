@@ -10,12 +10,24 @@ use Symfony\Component\HttpKernel\Exception\NotFoundHttpException;
 
 class ProduitController extends Controller
 {
-    public function listerAction()
+    public function listerAction($idCategorie)
     {
-        $repository = $this->getDoctrine()->getEntityManager()->getRepository('AdminAdminBundle:Produit');
-        $produits = $repository->findAll();
+        $em = $this->getDoctrine()->getEntityManager();
+        if(isset($idCategorie))
+        {
+            $produits  = $em->getRepository('AdminAdminBundle:Produit')->findByCategorieId($idCategorie);
+        }
+        else
+        {
+            $produits = $em->getRepository('AdminAdminBundle:Produit')->findAll();
+        }
+
+        $categories = $em->getRepository('AdminAdminBundle:Categorie')->findAll();
+
         return $this->render('@AdminAdmin/Produit/lister.html.twig', array(
-            'produits' => $produits
+            'produits'   => $produits,
+            'categories' => $categories,
+            'selectedId' => $idCategorie
         ));
     }
 

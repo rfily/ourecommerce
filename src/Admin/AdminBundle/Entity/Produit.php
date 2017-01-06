@@ -2,6 +2,7 @@
 
 namespace Admin\AdminBundle\Entity;
 
+use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\ORM\Mapping as ORM;
 
 /**
@@ -49,6 +50,19 @@ class Produit
      */
     private $actif;
 
+    /**
+     * @var
+     *
+     * @ORM\ManyToMany(targetEntity="Admin\AdminBundle\Entity\Categorie")
+     * @ORM\JoinColumn(nullable=true)
+     */
+    private $categories;
+
+
+    public function __construct()
+    {
+        $this->categories = new ArrayCollection();
+    }
 
     /**
      * Get id
@@ -155,5 +169,38 @@ class Produit
     {
         return $this->actif;
     }
-}
 
+    /**
+     * Add category
+     *
+     * @param \Admin\AdminBundle\Entity\Categorie $category
+     *
+     * @return Produit
+     */
+    public function addCategory(\Admin\AdminBundle\Entity\Categorie $category)
+    {
+        $this->categories[] = $category;
+
+        return $this;
+    }
+
+    /**
+     * Remove category
+     *
+     * @param \Admin\AdminBundle\Entity\Categorie $category
+     */
+    public function removeCategory(\Admin\AdminBundle\Entity\Categorie $category)
+    {
+        $this->categories->removeElement($category);
+    }
+
+    /**
+     * Get categories
+     *
+     * @return \Doctrine\Common\Collections\Collection
+     */
+    public function getCategories()
+    {
+        return $this->categories;
+    }
+}

@@ -18,6 +18,13 @@ class ProduitType extends AbstractType
             ->add('prix')
             ->add('description')
             ->add('actif')
+            ->add('categories', 'entity', array(
+                'class'    => 'Admin\AdminBundle\Entity\Categorie',
+                'property' => 'nom',
+                'multiple' => true,
+                'expanded' => true,
+                'required' => false
+            ))
         ;
     }
     
