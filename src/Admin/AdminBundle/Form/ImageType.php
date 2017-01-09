@@ -6,7 +6,7 @@ use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
 
-class ProduitType extends AbstractType
+class ImageType extends AbstractType
 {
     /**
      * {@inheritdoc}
@@ -14,18 +14,10 @@ class ProduitType extends AbstractType
     public function buildForm(FormBuilderInterface $builder, array $options)
     {
         $builder
-            ->add('nom')
-            ->add('prix')
-            ->add('description')
-            ->add('actif')
-            ->add('categories', 'entity', array(
-                'class'    => 'Admin\AdminBundle\Entity\Categorie',
-                'property' => 'nom',
-                'multiple' => true,
-                'expanded' => true,
-                'required' => false
+            ->add('file', 'file', array(
+                'required' => false,
+                'label'    => false
             ))
-            ->add('image', new ImageType())
         ;
     }
     
@@ -35,7 +27,7 @@ class ProduitType extends AbstractType
     public function configureOptions(OptionsResolver $resolver)
     {
         $resolver->setDefaults(array(
-            'data_class' => 'Admin\AdminBundle\Entity\Produit'
+            'data_class' => 'Admin\AdminBundle\Entity\Image'
         ));
     }
 
@@ -44,7 +36,7 @@ class ProduitType extends AbstractType
      */
     public function getBlockPrefix()
     {
-        return 'admin_adminbundle_produit';
+        return 'admin_adminbundle_image';
     }
 
 

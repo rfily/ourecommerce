@@ -58,6 +58,13 @@ class Produit
      */
     private $categories;
 
+    /**
+     * @var
+     *
+     * @ORM\OneToOne(targetEntity="Admin\AdminBundle\Entity\Image", cascade={"persist", "remove"})
+     */
+    private $image;
+
 
     public function __construct()
     {
@@ -202,5 +209,29 @@ class Produit
     public function getCategories()
     {
         return $this->categories;
+    }
+
+    /**
+     * Set image
+     *
+     * @param \Admin\AdminBundle\Entity\Image $image
+     *
+     * @return Produit
+     */
+    public function setImage(\Admin\AdminBundle\Entity\Image $image = null)
+    {
+        $this->image = $image;
+
+        return $this;
+    }
+
+    /**
+     * Get image
+     *
+     * @return \Admin\AdminBundle\Entity\Image
+     */
+    public function getImage()
+    {
+        return $this->image;
     }
 }
