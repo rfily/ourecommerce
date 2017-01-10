@@ -55,13 +55,14 @@
                         </td>
                         <td class="hidden-xs">{{ produit.id }}</td>
                         <td>
+                            {% set img_src=null %}
                             {% if produit.image is not null %}
                                 {% set img_src = produit.image.uploadDir ~ '/' ~ produit.image.id ~ '.' ~ produit.image.url %}
                             {% endif %}
                             <a href="#"
                                data-toggle="popover"
                                title="Photo"
-                               data-content="<img {% if img_src is defined %}src='{{ asset(img_src) }}'{% endif %} width='150' alt='photo_du_produit'/>"
+                               data-content="<img {% if img_src is not null %}src='{{ asset(img_src) }}'{% endif %} width='150' alt='photo_du_produit'/>"
                             >
                                {{ produit.nom }}
                            </a>
