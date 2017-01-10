@@ -34,11 +34,6 @@ class UtilisateurController extends Controller
             if($oTheform->isValid())
             {
 
-                $exists = $userManager->findUserBy(array('email' => $user->getEmail()));
-                /*if ($exists instanceof Utilisateur) {
-                    throw new HttpException(409, 'Email already taken');
-                }*/
-
                 $user->addRole("ROLE_USER");
 
                 $userManager->updateUser($user);
@@ -70,12 +65,6 @@ class UtilisateurController extends Controller
         {
             if($oTheform->isValid())
             {
-
-                $exists = $userManager->findUserBy(array('email' => $user->getEmail()));
-                /*if ($exists instanceof Utilisateur) {
-                    throw new HttpException(409, 'Email already taken');
-                }*/
-
                 if ( $user->hasRole("ROLE_ADMIN") )
                     $user->setEnabled(1);
 
