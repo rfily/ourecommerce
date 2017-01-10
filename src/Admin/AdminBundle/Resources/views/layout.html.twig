@@ -45,11 +45,8 @@
             <a class="navbar-brand" href="#"><span>OurEcommerce</span>Admin</a>
             <ul class="user-menu">
                 <li class="dropdown pull-right">
-                    {#<a href="#" class="dropdown-toggle" data-toggle="dropdown"><svg class="glyph stroked male-user"><use xlink:href="#stroked-male-user"></use></svg> {{ 'layout.logged_in_as'|trans({'%username%': app.user.username}, 'FOSUserBundle') }} <span class="caret"></span></a>#}
+                    <a href="#" class="dropdown-toggle" data-toggle="dropdown"><svg class="glyph stroked male-user"><use xlink:href="#stroked-male-user"></use></svg> {{ 'layout.logged_in_as'|trans({'%username%': app.user.username}, 'FOSUserBundle') }} <span class="caret"></span></a>
                     <ul class="dropdown-menu" role="menu">
-                        {#<li><a href="{{ path('fos_user_profile_show') }}"><svg class="glyph stroked male-user"><use xlink:href="#stroked-male-user"></use></svg> Profile</a></li>#}
-                        {#<li><a href="{{ path('fos_user_profile_edit') }}"><svg class="glyph stroked male-user"><use xlink:href="#stroked-male-user"></use></svg> Settings</a></li>#}
-                        {#<li><a href="{{ path('fos_user_security_logout') }}"><svg class="glyph stroked cancel"><use xlink:href="#stroked-cancel"></use></svg> Logout</a></li>#}
                         <li><a href="{{ path('fos_user_security_logout') }}"><svg class="glyph stroked cancel"><use xlink:href="#stroked-cancel"></use></svg> Logout</a></li>
                     </ul>
                 </li>
@@ -65,12 +62,7 @@
         </div>
     </form>
     <ul class="nav menu">
-        {#<li><a href="{{ path('admin_admin_page') }}"><svg class="glyph stroked calendar"><use xlink:href="#stroked-calendar"></use></svg> Pages</a></li>#}
-        <li><a href="{{ path('admin_admin_produits') }}"><i class="fa fa-lg fa-shopping-cart" aria-hidden="true"></i>    Produits</a></li>
-        <li><a href="{{ path('admin_admin_categorie') }}"><i class="fa fa-lg fa-folder-o" aria-hidden="true"></i> Categories</a></li>
-        {% if 'ROLE_ADMIN' in app.user.roles %}
-            <li><a href="{{ path('admin_admin_utilisateur') }}"><i class="fa fa-lg fa-user-o" aria-hidden="true"></i> Utilisateurs</a></li>
-        {% endif %}
+        {{ render(controller("AdminAdminBundle:Admin:menu", {"request": app.request})) }}
     </ul>
 
 </div><!--/.sidebar-->
@@ -78,8 +70,7 @@
 <div class="col-sm-9 col-sm-offset-3 col-lg-10 col-lg-offset-2 main">
     <div class="row">
         <ol class="breadcrumb">
-            <li><a href="#"><svg class="glyph stroked home"><use xlink:href="#stroked-home"></use></svg></a></li>
-            <li class="active">Icons</li>
+            {{ render(controller("AdminAdminBundle:Admin:breadcrumb", {"request": app.request})) }}
         </ol>
     </div><!--/.row-->
     {% block theblog_body %}

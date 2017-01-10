@@ -1,5 +1,5 @@
 admin_admin_homepage:
-    path:     /
+    path:     /test
     defaults: { _controller: AdminAdminBundle:Default:index }
 
 admin_admin_categorie:
@@ -53,17 +53,17 @@ admin_admin_supprimer_produit:
         id: \d+
 
 admin_admin_utilisateur:
-    path:     /admin/utilisateur_liste
+    path:     /utilisateur_liste
     defaults: { _controller: AdminAdminBundle:Utilisateur:index }
 
 admin_admin_utilisateur_ajout:
-    path:     /admin/utilisateur_ajout
+    path:     /utilisateur/ajouter
     defaults: { _controller: AdminAdminBundle:Utilisateur:ajout }
 
 admin_admin_utilisateur_modif:
-    path:     /admin/utilisateur_modif/{id}
+    path:     /utilisateur/modifier/{id}
     defaults: { _controller: AdminAdminBundle:Utilisateur:modif }
 
 admin_admin_utilisateur_suppr:
-    path:     /admin/utilisateur_suppr/{id}
+    path:     /utilisateur/supprimer/{id}
     defaults: { _controller: AdminAdminBundle:Utilisateur:suppr }

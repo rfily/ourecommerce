@@ -1,0 +1,17 @@
+<li class="{{ class_produit }}">
+    <a href="{{ path('admin_admin_produits') }}">
+        <i class="fa fa-lg fa-shopping-cart" aria-hidden="true"></i>    Produits
+    </a>
+</li>
+<li class="{{ class_categorie }}">
+    <a href="{{ path('admin_admin_categorie') }}">
+        <i class="fa fa-lg fa-folder-o" aria-hidden="true"></i> Categories
+    </a>
+</li>
+{% if 'ROLE_ADMIN' in app.user.roles %}
+    <li class="{{ class_utilisateur }}">
+        <a href="{{ path('admin_admin_utilisateur') }}">
+            <i class="fa fa-lg fa-user-o" aria-hidden="true"></i> Utilisateurs
+        </a>
+    </li>
+{% endif %}

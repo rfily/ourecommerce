@@ -2,6 +2,7 @@
 
 namespace Admin\AdminBundle\Form;
 
+use Admin\AdminBundle\Subscriber\AddEnabledFieldSubscriber;
 use FOS\UserBundle\Util\LegacyFormHelper;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\FormBuilderInterface;
@@ -29,7 +30,7 @@ class UtilisateurType extends AbstractType
         'invalid_message' => 'fos_user.password.mismatch',
     ));
 
-        $builder->add('enabled',null, array('label'=>'Actif', 'translation_domain' => 'FOSUserBundle'));
+        $builder->addEventSubscriber(new AddEnabledFieldSubscriber());
     }
     /**
      * {@inheritdoc}
