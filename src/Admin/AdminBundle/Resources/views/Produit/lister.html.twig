@@ -51,17 +51,28 @@
                 <tr>
                         <td align="center">
                             <a href="{{ path('admin_admin_modifier_produit', {'id': produit.id}) }}" class="btn btn-default" data-toggle="tooltip" title="modifier"><em class="fa fa-pencil"></em></a>
-                            <a href="{{ path('admin_admin_supprimer_produit', {'id': produit.id}) }}" class="btn btn-danger" data-toggle="tooltip" title="supprimer"><em class="fa fa-trash"></em></a>
+                            <a href="{{ path('admin_admin_supprimer_produit', {'id': produit.id}) }}" class="btn btn-danger" data-toggle="tooltip" title="supprimer" onclick="return confirm('Etes vous sure de vouloir supprimer le produit ?')"><em class="fa fa-trash"></em></a>
                         </td>
                         <td class="hidden-xs">{{ produit.id }}</td>
-                        <td>{{ produit.nom }}</td>
+                        <td>
+                            {% if produit.image is not null %}
+                                {% set img_src = produit.image.uploadDir ~ '/' ~ produit.image.id ~ '.' ~ produit.image.url %}
+                            {% endif %}
+                            <a href="#"
+                               data-toggle="popover"
+                               title="Photo"
+                               data-content="<img {% if img_src is defined %}src='{{ asset(img_src) }}'{% endif %} width='150' alt='photo_du_produit'/>"
+                            >
+                               {{ produit.nom }}
+                           </a>
+                        </td>
                         <td>{{ produit.prix }}</td>
                         <td>{{ produit.description }}</td>
                         <td align="center">
                             {% if produit.actif %}
-                                <a class="btn btn-default" data-toggle="tooltip" title="desactiver"><em class="fa fa-check-square"></em></a>
+                                <a class="btn btn-default" data-toggle="tooltip" title="activé"><em class="fa fa-check-square"></em></a>
                             {% else %}
-                                <a class="btn btn-default" data-toggle="tooltip" title="activer"><em class="fa fa-minus"></em></a>
+                                <a class="btn btn-default" data-toggle="tooltip" title="desactivé"><em class="fa fa-minus"></em></a>
                             {% endif %}
                         </td>
                     </tr>
@@ -72,15 +83,15 @@
         </div>
         <div class="panel-footer">
             <div class="row">
-                <div class="col col-xs-4">Page 1 of 5
+                <div class="col col-xs-4">Page {{ page }} sur {{ nbPages }}
                 </div>
                 <div class="col col-xs-8">
                     <ul class="pagination hidden-xs pull-right">
-                        <li><a href="#">1</a></li>
-                        <li><a href="#">2</a></li>
-                        <li><a href="#">3</a></li>
-                        <li><a href="#">4</a></li>
-                        <li><a href="#">5</a></li>
+                        {% for p in range(1, nbPages) %}
+                            <li{% if p == page %} class="active"{% endif %}>
+                                <a href="{{ path('admin_admin_produits', {'page': p}) }}">{{ p }}</a>
+                            </li>
+                        {% endfor %}
                     </ul>
                     <ul class="pagination visible-xs pull-right">
                         <li><a href="#">«</a></li>
