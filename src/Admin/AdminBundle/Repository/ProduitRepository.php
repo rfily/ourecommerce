@@ -1,6 +1,7 @@
 <?php
 
 namespace Admin\AdminBundle\Repository;
+use Doctrine\ORM\Tools\Pagination\Paginator;
 
 /**
  * ProduitRepository
@@ -10,7 +11,7 @@ namespace Admin\AdminBundle\Repository;
  */
 class ProduitRepository extends \Doctrine\ORM\EntityRepository
 {
-    public function findByCategorieId($idCategorie)
+    public function findByCategorieId($idCategorie, $page, $nbParPage)
     {
         $qb = $this->createQueryBuilder('p')
                 ->join('p.categories', 'c')
@@ -19,9 +20,25 @@ class ProduitRepository extends \Doctrine\ORM\EntityRepository
                 ->where('c.id = :idC')
         ;
 
-        return $qb
-            ->getQuery()
-            ->getResult()
+        $query = $qb->getQuery();
+
+        $query->setFirstResult(($page - 1) * $nbParPage)
+            ->setMaxResults($nbParPage)
         ;
+
+        return new Paginator($query, true);
+    }
+
+    public function getProduits($page, $nbParPage)
+    {
+        $query = $this->createQueryBuilder('p')
+            ->getQuery()
+        ;
+
+        $query->setFirstResult(($page - 1) * $nbParPage)
+            ->setMaxResults($nbParPage)
+        ;
+
+        return new Paginator($query, true);
     }
 }

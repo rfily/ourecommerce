@@ -17,3 +17,4 @@ composer.lock
 /web/config.php
 /web/css
 web/js
+web/uploads

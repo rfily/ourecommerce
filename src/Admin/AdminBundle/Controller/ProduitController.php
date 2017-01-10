@@ -10,16 +10,29 @@ use Symfony\Component\HttpKernel\Exception\NotFoundHttpException;
 
 class ProduitController extends Controller
 {
-    public function listerAction($idCategorie)
+    public function listerAction($page, $idCategorie)
     {
+        if ($page < 1) {
+            throw $this->createNotFoundException("La page ".$page." n'existe pas.");
+        }
+
+        $nbParPage = 10;
+
         $em = $this->getDoctrine()->getEntityManager();
         if(isset($idCategorie))
         {
-            $produits  = $em->getRepository('AdminAdminBundle:Produit')->findByCategorieId($idCategorie);
+            $produits  = $em->getRepository('AdminAdminBundle:Produit')->findByCategorieId($idCategorie, $page, $nbParPage);
         }
         else
         {
-            $produits = $em->getRepository('AdminAdminBundle:Produit')->findAll();
+            $produits = $em->getRepository('AdminAdminBundle:Produit')->getProduits($page, $nbParPage);
+        }
+
+        $nbPages = ceil(count($produits)/$nbParPage);
+
+        // Si la page n'existe pas, on retourne une 404
+        if ($page > $nbPages) {
+            throw $this->createNotFoundException("La page ".$page." n'existe pas.");
         }
 
         $categories = $em->getRepository('AdminAdminBundle:Categorie')->findAll();
@@ -27,7 +40,9 @@ class ProduitController extends Controller
         return $this->render('@AdminAdmin/Produit/lister.html.twig', array(
             'produits'   => $produits,
             'categories' => $categories,
-            'selectedId' => $idCategorie
+            'selectedId' => $idCategorie,
+            'nbPages'    => $nbPages,
+            'page'       => $page
         ));
     }
 
