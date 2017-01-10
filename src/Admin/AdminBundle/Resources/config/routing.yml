@@ -29,12 +29,14 @@ admin_admin_detailcategorie:
         id: \d+
 
 admin_admin_produits:
-    path:     /produits/{idCategorie}
+    path:     /produits/{page}/{idCategorie}
     defaults:
-        _controller: AdminAdminBundle:Produit:lister
+        _controller:  AdminAdminBundle:Produit:lister
         idCategorie : null
+        page:         1
     requirements:
-        id: \d+
+        id:   \d+
+        page: \d+
 
 admin_admin_ajouter_produit:
     path:     /produit/ajouter
